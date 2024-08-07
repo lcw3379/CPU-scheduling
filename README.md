@@ -30,8 +30,6 @@ P는 Priority, CP는 Computing time이다.
 
 
 
-4개의 
-
 결과
 
 ![image](https://github.com/user-attachments/assets/b70a7675-4bcf-4f0a-ac2f-cb05c3065f6d)
