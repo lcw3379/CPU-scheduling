@@ -24,10 +24,6 @@ P는 Priority, CP는 Computing time이다.
 구조
 ![image](https://github.com/user-attachments/assets/f8105491-afb2-4cd5-a5b8-6cc042b070d1)
 
-![image](https://github.com/user-attachments/assets/25a7b612-ee9b-43e2-96e9-17cadce6af1a)
-
-
-
 
 
 결과
