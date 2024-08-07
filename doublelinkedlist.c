@@ -44,20 +44,18 @@ int main(void) {
 
 void initialize_queue() {
 	int i;
-
-	//priority ÃþÀÌ 3°³ -> °¢ ·¹µðÅ¥µéÀÇ Çìµå°¡ 3°³ Á¸ÀçÇÑ´Ù´Â ¶æÀÌ³×.
 	for (i = 0; i < Queue_level; i++) {
 		head[i] = (queue_pointer)malloc(sizeof(struct priority_queue));
 		head[i]->left_link = NULL;	
 		head[i]->right_link = NULL;
 		head[i]->priority = 0;
 		head[i]->computing_time = 0;	
-		printf("%d¹øÂ° quelevel »ý¼º¿Ï·á\n", i + 1);
+		printf("%dë²ˆì§¸ quelevel ìƒì„±ì™„ë£Œ\n", i + 1);
 	}
 }
 
 int insert_queue(int priority, int computing_time) {
-	//»õ·Î¿î ³ëµå »ý¼º
+	//ìƒˆë¡œìš´ ë…¸ë“œ ìƒì„±
 	queue_pointer QP = malloc(sizeof(struct priority_queue));
 	QP->priority = priority;
 	QP->computing_time = computing_time;
@@ -66,28 +64,28 @@ int insert_queue(int priority, int computing_time) {
 
 	int qlevel = level_check(priority);
 
-	if (head[qlevel]->right_link == NULL) { //Å¥¿¡ ¾Æ¹«°Íµµ ¾ø°í ÀÌ ³ëµå°¡ ÃÖÃÊÀÇ ÀÔ·ÂÀÌ¸é ¹ß»ý.
-		printf("priority %dÃþÀÇ Ã¹ ³ëµå ÀÔ·Â.\n", qlevel+1);
+	if (head[qlevel]->right_link == NULL) { //íì— ì•„ë¬´ê²ƒë„ ì—†ê³  ì´ ë…¸ë“œê°€ ìµœì´ˆì˜ ìž…ë ¥ì´ë©´ ë°œìƒ.
+		printf("priority %dì¸µì˜ ì²« ë…¸ë“œ ìž…ë ¥.\n", qlevel+1);
 		QP->left_link = head[qlevel];
 		QP->right_link = NULL;
 
 		head[qlevel]->right_link = QP;
 		head[qlevel]->computing_time = 0;
-		head[qlevel]->priority = 0; //Çìµå´Â ·¹µðÅ¥ ¿¬°áÇÏ´Â Æ÷ÀÎÅÍ ¸»°í »ç¿ë ¾ÈÇÔ.
+		head[qlevel]->priority = 0; //í—¤ë“œëŠ” ë ˆë””í ì—°ê²°í•˜ëŠ” í¬ì¸í„° ë§ê³  ì‚¬ìš© ì•ˆí•¨.
 		printf("value added. priority : %d, CP : %d\n", QP->priority,QP->computing_time);
 		return 0;
 	}
 
-	else { //Å¥ ¾È¿¡ ±âÁ¸ ³ëÆ®°¡ ÀÖÀ¸¸é ¹ß»ý.
+	else { //í ì•ˆì— ê¸°ì¡´ ë…¸íŠ¸ê°€ ìžˆìœ¼ë©´ ë°œìƒ.
 		int i = 0;
 		queue_pointer cur = head[qlevel];
-		while (cur->right_link != NULL) {  //ÇöÀç ³ëµåÀÇ ¿À¸¥ÂÊ ¿¬°áÀÌ ¾øÀ»¶§±îÁö ½ÇÇà!
+		while (cur->right_link != NULL) {  //í˜„ìž¬ ë…¸ë“œì˜ ì˜¤ë¥¸ìª½ ì—°ê²°ì´ ì—†ì„ë•Œê¹Œì§€ ì‹¤í–‰!
 			cur = cur->right_link;
-			if (cur->priority < QP->priority) { //ÇöÀç ³ëµåÀÇ priority°¡ ÀÎ¼­Æ®ÇÒ ³ëµåÀÇ priorityº¸´Ù ÀÛÀ¸¸é ´ÙÀ½ ³ëµå °Ë»ö
+			if (cur->priority < QP->priority) { //í˜„ìž¬ ë…¸ë“œì˜ priorityê°€ ì¸ì„œíŠ¸í•  ë…¸ë“œì˜ priorityë³´ë‹¤ ìž‘ìœ¼ë©´ ë‹¤ìŒ ë…¸ë“œ ê²€ìƒ‰
 
 			}
 			else if(cur->priority > QP->priority){
-				queue_pointer prev = cur->left_link;  //ÇöÀç °Ë»ö ³ëµåÀÇ ÀÌÀü ³ëµå Æ÷ÀÎÅÍ ¼³Á¤.
+				queue_pointer prev = cur->left_link;  //í˜„ìž¬ ê²€ìƒ‰ ë…¸ë“œì˜ ì´ì „ ë…¸ë“œ í¬ì¸í„° ì„¤ì •.
 
 				QP->right_link = prev->right_link;
 				QP->left_link = prev;
@@ -103,7 +101,7 @@ int insert_queue(int priority, int computing_time) {
 			}
 		}
 
-		if (cur->right_link == NULL) { //¸ÇµÚ¿¡ ÀÎ¼­Æ®ÇØ¾ß ÇÏ´Â °æ¿ì¿¡ »ç¿ë.
+		if (cur->right_link == NULL) { //ë§¨ë’¤ì— ì¸ì„œíŠ¸í•´ì•¼ í•˜ëŠ” ê²½ìš°ì— ì‚¬ìš©.
 			if (cur->priority < QP->priority) {
 				cur->right_link = QP;
 				QP->left_link = cur;
@@ -116,13 +114,8 @@ int insert_queue(int priority, int computing_time) {
 	return 0;
 }
 
-
-
-
-
-
 int level_check(int priority) {
-	if (priority >= 1 && priority <= 10) return 0; //priority°ªµû¶ó 0,1,2·Î ³ª´¸
+	if (priority >= 1 && priority <= 10) return 0; //priorityê°’ë”°ë¼ 0,1,2ë¡œ ë‚˜ë‰¨
 	else if (priority >= 11 && priority <= 20) return 1;
 	else if (priority >= 21 && priority <= 30) return 2;
 	else {
@@ -133,7 +126,7 @@ int level_check(int priority) {
 
 
 void print_queue() {
-	printf("Ãâ·Â ½ÇÇà\n");
+	printf("ì¶œë ¥ ì‹¤í–‰\n");
 
 	for (int i = 0; i < Queue_level; i++) {
 		queue_pointer cur = head[i];
